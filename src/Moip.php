@@ -37,7 +37,7 @@ class Moip
      */
     public function start()
     {
-        $this->moip = $this->app->make(Api::class, [$this->app->make(MoipBasicAuth::class, [config('moip.credentials.token'), config('moip.credentials.key')]), $this->getHomologated()]);
+        $this->moip = $this->app->make(Api::class, [$this->app->make(MoipBasicAuth::class, [config('services.moip.credentials.token'), config('services.moip.credentials.key')]), $this->getHomologated()]);
 
         return $this;
     }
@@ -99,6 +99,6 @@ class Moip
      */
     private function getHomologated()
     {
-        return config('moip.homologated') === true ? Api::ENDPOINT_PRODUCTION : Api::ENDPOINT_SANDBOX;
+        return config('services.moip.homologated') === true ? Api::ENDPOINT_PRODUCTION : Api::ENDPOINT_SANDBOX;
     }
 }
