@@ -4,7 +4,6 @@ namespace Artesaos\Moip;
 
 use Illuminate\Contracts\Foundation\Application;
 use Moip\Moip as Api;
-use Moip\Auth\BasicAuth;
 
 class Moip
 {
@@ -37,7 +36,7 @@ class Moip
      */
     public function start()
     {
-        $this->moip = $this->app->make(Api::class, [$this->app->make(BasicAuth::class, [config('services.moip.credentials.token'), config('services.moip.credentials.key')]), $this->getHomologated()]);
+        $this->moip = $this->app->make(Api::class, [$this->app->make(\Moip\Auth\BasicAuth::class, [config('services.moip.credentials.token'), config('services.moip.credentials.key')]), $this->getHomologated()]);
 
         return $this;
     }
